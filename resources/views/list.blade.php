@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    @include('layout.header')
 </head>
 <body>
-    <form action="{{route('profile')}}" method="GET">
-        @csrf
-        <button type="submit" >Profile</button>
-    </form>
-    <table>
-    <tr>
+@include('layout.navbar')
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
         <th>Name</th>
-        <th>Email</th>
-        <th>Birth Day</th>
+        <th>Info</th>
+        <th>Status</th>
+        <th>Position</th>
+        <th>Actions</th>
       </tr>
-    @foreach ($users as $user)
-    <tr>
-        <th>{{ $user->name }}</th>
-        <th>{{ $user->email }}</th>
-        <th>{{ $user->birth_day }}</th>
-        <th>
-        @if ($role == 1)
-        <form action="{{route('view')}}" method="POST">
-            <button type="submit" value="{{$user->id}}">Xem Profile</button>    
-        </form>
-        @endif
-        </th>
-    </tr>
-    @endforeach
-</table>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+        <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                <div class="ms-3">
+                  <p class="fw-bold mb-1">{{$user->name}}</p>
+                </div>
+              </div> 
+            </td>
+            <td>
+                <p class="fw-normal mb-1">Email: {{$user->email}}</p>
+                <p class="fw-normal mb-1">Phone: {{$user->phone}}</p>
+            </td>
+            @if ($user->status == 1)
+            <td>
+                <span class="badge badge-success rounded-pill d-inline">Đang làm việc</span>
+            </td>
+            @else
+            <td>
+                <span class="badge badge-warning rounded-pill d-inline">Đã Nghỉ Việc</span>
+            </td>
+            @endif
+            
+            @if ($user->auth == 1)
+                <td>Admin</td>
+            @endif
+            @if ($user->auth == 2)
+                <td>Quản lý bộ phận</td>
+            @endif
+            @if ($user->auth == 3)
+                <td>Nhân viên</td>
+            @endif
+            <td>
+              <button type="button" class="btn btn-primary btn-rounded">
+                Edit
+              </button>
 
-<form action="{{route('logout')}}" method="GET">
-    @csrf
-    <button type="submit" >Logout</button>
-</form>
+              <button type="button" class="btn btn-danger btn-rounded">
+                Delete
+              </button>
+            </td>
+          </tr>    
+        @endforeach
+    </tbody>
+  </table>
+@include('layout.footer')
 </body>
 </html>

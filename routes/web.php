@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ListEmployeeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'store'])->name('profile');
     Route::get('/list', [ListEmployeeController::class, 'store'])->middleware('verified-account');
-    Route::get('/profile_user', [ProfileController::class, 'view_profile'])->name('view');
-    Route::post('/update_profile', [ProfileController::class, 'update_view'])->name('update_view');
+    // Route::get('/profile_user', [ProfileController::class, 'view_profile'])->name('view');
+    // Route::post('/update_profile', [ProfileController::class, 'update_view'])->name('update_view');
+    Route::post('/update_profile', [ProfileController::class, 'update_profile'])->name('update_profile');
 });

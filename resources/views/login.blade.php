@@ -1,53 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {{-- @include('auth.header') --}}
+  @include('layout.header')
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="card">
-    {{-- <div>{{dd($users)}}</div> --}}
-    <div class="card-body login-card-body">
+<body>
       <form action="login/store" method="post">
         @csrf
-        <div class="input-group mb-3">
-          <input type="email" name="email" id="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input type="text" name="email" id="email" class="form-control" />
+          <label class="form-label" for="email">Email address</label>
+        </div>
+      
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" name="password" id="password" class="form-control" />
+          <label class="form-label" for="password">Password</label>
+        </div>
+      
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <!-- Checkbox -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="checkbox" checked />
+              <label class="form-check-label" for="checkbox"> Remember me </label>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
+      
+          <div class="col">
+            <!-- Simple link -->
+            <a href="#!">Forgot password?</a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" name="remember" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-        </div>
+      
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+      
       </form>
 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-    </div>
-  </div>
-</div>
-{{-- @include('auth.footer') --}}
-
+@include('layout.footer')
 </body>
 </html>
+
+
