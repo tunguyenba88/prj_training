@@ -10,11 +10,15 @@
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                  <img src="{{$user->image}}" id="image-show" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
                   <h5 class="my-3">{{$user->name}}</h5>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Edit Avatar</button>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                      @csrf
+                      <input type="file" class="form-control" id="upload" name="image" hidden/>                       
+                      <label for="upload" class="btn btn-primary">Change Avatar</label>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -27,7 +31,15 @@
                       <p class="mb-0">Position</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Admin</p>
+                      @if ($user->auth == 1)
+                        <p class="text-muted mb-0">Admin</p>
+                      @endif
+                      @if ($user->auth == 2)
+                        <p class="text-muted mb-0">Quản Lý Bộ Phận</p>
+                      @endif
+                      @if ($user->auth == 3)
+                        <p class="text-muted mb-0">Nhân Viên</p>
+                      @endif
                     </div>
                   </div>  
                   <hr>

@@ -4,7 +4,9 @@
   @include('layout.header')
 </head>
 <body>
+  <div class="d-flex justify-content-center" style="margin-top: 10%">
       <form action="login/store" method="post">
+        
         @csrf
         <!-- Email input -->
         <div class="form-outline mb-4">
@@ -17,7 +19,7 @@
           <input type="password" name="password" id="password" class="form-control" />
           <label class="form-label" for="password">Password</label>
         </div>
-      
+        
         <!-- 2 column grid layout for inline styling -->
         <div class="row mb-4">
           <div class="col d-flex justify-content-center">
@@ -33,12 +35,14 @@
             <a href="#!">Forgot password?</a>
           </div>
         </div>
-      
+        
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-      
+        <div class="form-outline mb-4">
+          @include('layout.alert')  
+        </div>
       </form>
-
+  </div>
 @include('layout.footer')
 </body>
 </html>
