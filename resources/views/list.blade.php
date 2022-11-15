@@ -5,6 +5,31 @@
 </head>
 <body>
 @include('layout.navbar')
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <form action="list" method="GET" onchange="submit()">
+        @csrf
+        <select class="form-select" id="select" name="select" style="width: 5rem">
+          <option selected></option> 
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </form>
+      <form action="" method="GET">
+        @csrf
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" />
+            <label class="form-label" for="form1">Search</label>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+</nav>
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
       <tr>
@@ -67,6 +92,9 @@
         @endforeach
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    {!! $users->links() !!}
+  </div>
 @include('layout.footer')
 </body>
 </html>

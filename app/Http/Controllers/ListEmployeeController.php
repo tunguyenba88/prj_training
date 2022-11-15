@@ -2,22 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\ListService;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ListEmployeeController extends Controller
 {
-    public function store()
+    protected $search;
+
+    public function __construct(ListService $search)
     {
+        $this->search = $search;
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request->get('select'));
         $user = Auth::user();
         $role = $user->auth;
-        $users = DB::table('users')->get();
+        $users = User::paginate($request->get('select', 5));
         if ($user->auth < 3) {
-            // $users = DB::table('users')->get();
-            // return view('list', ['users' => $users]);
-            return view('list', ['users' => $users, 'role' => $role]);
+            return view('list', ['role' => $role], compact('users'));
         }
         return redirect('profile');
+    }
+
+    public function search(Request $request)
+    {
+        $request = $this->search->store($request);
+        dd($request);
+        return response()->json([
+            'error' => false,
+            'url'   => $request,
+        ]);
     }
 }
