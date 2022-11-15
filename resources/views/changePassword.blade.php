@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="d-flex justify-content-center" style="margin-top: 10%">
-    <form action="{{ route('change_password_custom') }}" method="post">
+    <form action="{{ route('changePasswordCustom') }}" method="post">
       @csrf
       <div class="form-outline mb-4">
         <input type="password" name="current_password" id="current_password" class="form-control" />

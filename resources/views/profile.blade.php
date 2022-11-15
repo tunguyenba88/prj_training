@@ -85,7 +85,7 @@
         </div>
       </section>
       @include('layout.userEdit')
-      <form action="{{ route('change_password') }}" method="GET">
+      <form action="{{ route('changePassword') }}" method="GET">
         <button type="submit" class="btn btn-primary">
           Change Password
         </button>

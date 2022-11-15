@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class ProfileController extends Controller
         return view('profile', ['user' => $user]);
     }
 
-    public function update_profile(Request $request)
+    public function updateProfile(Request $request)
     {
         $user_id = Auth::user()->id;
 
@@ -25,32 +26,23 @@ class ProfileController extends Controller
         return redirect('profile');
     }
 
-    public function change_password()
+    public function changePassword()
     {
         return view('changePassword');
     }
 
-    public function change_password_custom(Request $request)
+    public function changePasswordCustom(PasswordRequest $request)
     {
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required',
-            'confirm_password' => 'required',
-        ]);
+
         $user_id = Auth::user()->id;
-        $password = DB::table('users')->where('id', $user_id)->get('password');
+        $password = DB::table('users')->where('id', $user_id)->first('password');
         $current_password = $request->current_password;
-        if (!(Hash::check($current_password, $password[0]->password))) {
+        if (!(Hash::check($current_password, $password->password))) {
             return redirect()->back()->with("error", "Nhập sai mật khẩu");
         }
         $new_password = $request->new_password;
-        if (Hash::check($new_password, $password[0]->password)) {
+        if (Hash::check($new_password, $password->password)) {
             return redirect()->back()->with("error", "Trùng với mật khẩu cũ");
-        }
-        $confirm_password = $request->confirm_password;
-
-        if (!($confirm_password == $new_password)) {
-            return redirect()->back()->with("error", "Khác");
         }
 
         DB::table('users')
