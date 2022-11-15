@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt(123456), // password
+            'password' => bcrypt('123456'), // password
             'remember_token' => Str::random(10),
             'birth_day' => fake()->unique()->dateTimeBetween('-7 days', '+2 months')->format('Y-m-d'),
             'status' => fake()->numberBetween($min = 2, $max = 2),

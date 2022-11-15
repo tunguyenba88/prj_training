@@ -31,4 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/list', [ListEmployeeController::class, 'store'])->middleware('verified-account');
     Route::post('/update_profile', [ProfileController::class, 'update_profile'])->name('update_profile');
     Route::post('/upload/store', [UploadController::class, 'store']);
+    Route::get('/change_password', [ProfileController::class, 'change_password'])->name('change_password');
+    Route::post('/change_password/store', [ProfileController::class, 'change_password_custom'])->name('change_password_custom');
 });
