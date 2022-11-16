@@ -15,11 +15,20 @@
           <option value="20">20</option>
         </select>
       </form>
-      <form action="link/store" method="GET">
+      <form action="{{ route('list') }}" method="GET" onchange="submit()">
         @csrf
         <select class="form-select" id="select" name="select" style="width: 5rem">
-          <option><button type="submit" name="status1" value="1">Dang lam</button></option>
-          <option><button type="submit" name="status2" value="2">Nghi lam</button></option>
+          <option value="0" {{$select == 0 ? 'selected' : ''}}>Loc theo bo phan</option>
+          <option value="1" {{$select == 1 ? 'selected' : ''}}>Dang lam</option>
+          <option value="2" {{$select == 2 ? 'selected' : ''}}>Nghi lam</option>
+        </select>
+      </form>
+      <form action="{{ route('list') }}" method="GET" onchange="submit()">
+        @csrf
+        <select class="form-select" id="select1" name="select1" style="width: 5rem">
+          <option value="1" {{$select == 1 ? 'selected' : ''}}>D1</option>
+          <option value="2" {{$select == 2 ? 'selected' : ''}}>D2</option>
+          <option value="3" {{$select == 3 ? 'selected' : ''}}>D3</option>
         </select>
       </form>
       <form action="{{route('search')}}" method="GET">
@@ -40,6 +49,7 @@
     <thead class="bg-light">
       <tr>
         <th>Name</th>
+        <th>Phòng</th>
         <th>Info</th>
         <th>@sortablelink('birth_day', 'Birth Day')</th>
         <th>@sortablelink('created_at', 'Started')</th>

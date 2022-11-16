@@ -14,7 +14,7 @@ class ProfileController extends Controller
         return view('profile', ['user' => $user]);
     }
 
-    public function update_profile(Request $request)
+    public function updateProfile(Request $request)
     {
         $user_id = Auth::user()->id;
 

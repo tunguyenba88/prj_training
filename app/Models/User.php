@@ -50,8 +50,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function scopeStatus($query, $type)
+    public function scopeActive($query)
     {
-        return $query->where('status', $type);
+        return $query->where('status', 1);
     }
 }

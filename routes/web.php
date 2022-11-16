@@ -28,7 +28,7 @@ Route::post('/login/store', [LoginController::class, 'store']);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'store'])->name('profile');
-    Route::post('/update_profile', [ProfileController::class, 'update_profile'])->name('update_profile');
+    Route::post('/update_profile', [ProfileController::class, 'updateProfile'])->name('update_profile');
     Route::post('/upload/store', [UploadController::class, 'store']);
     Route::group(['middleware' => ['verified-account']], function () {
         Route::get('/list', [ListEmployeeController::class, 'store'])->name('list');
