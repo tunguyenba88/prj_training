@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/update_profile', [ProfileController::class, 'update_profile'])->name('update_profile');
     Route::post('/upload/store', [UploadController::class, 'store']);
     Route::group(['middleware' => ['verified-account']], function () {
-        Route::get('/list', [ListEmployeeController::class, 'store']);
-        Route::get('/list/search', [ListEmployeeController::class, 'search']);
+        Route::get('/list', [ListEmployeeController::class, 'store'])->name('list');
+        Route::get('/list/search', [ListEmployeeController::class, 'search'])->name('search');
     });
 });

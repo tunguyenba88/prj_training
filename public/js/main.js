@@ -40,31 +40,32 @@ $("#upload").change(function () {
 //     });
 // });
 
-$("#form1").keyup(function () {
-    const value = this.value;
-    $.ajax({
-        type: "GET",
-        url: "/list/search",
-        data: {
-            search: value,
-        },
-        success: function (response) {
-            console.log(response);
-        },
-    });
-});
-
-// $(".pagination a").click(function (e) {
-//     e.preventDefault();
-//     var page = $(this).attr("href").split("page=")[1];
-//     getPosts(page);
-// });
-
-// function getPosts(page) {
+// $("#form1").keyup(function () {
+//     const value = this.value;
 //     $.ajax({
 //         type: "GET",
-//         url: "?page=" + page,
-//     }).success(function (data) {
-//         $("body").html(data);
+//         url: "/list/search",
+//         data: {
+//             search: value,
+//         },
+//         success: function (response) {
+//             $("tbody").html(response.data);
+//         },
 //     });
-// }
+// });
+
+$(".pagination a")
+    .unbind("click")
+    .click(function (e) {
+        e.preventDefault();
+        var page = $(this).attr("href").split("page=")[1];
+        console.log(page);
+        $.ajax({
+            type: "GET",
+            url: "?page=" + page,
+            success: function (data) {
+                console.log(data);
+                $("body").html(data);
+            },
+        });
+    });
