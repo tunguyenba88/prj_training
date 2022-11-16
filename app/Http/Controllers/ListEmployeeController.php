@@ -19,13 +19,11 @@ class ListEmployeeController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->get('select'));
-
-        $users = User::paginate(5);
-        // dd($users);
+        if ($request->select) {
+            dd($request->all());
+        }
+        $users = User::sortable()->paginate(5);
         return view('list', compact('users'));
-
-        // return redirect('profile');
     }
 
     public function search(Request $request)

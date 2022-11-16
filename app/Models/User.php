@@ -6,11 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,8 +27,10 @@ class User extends Authenticatable
         'auth',
         'image',
         'phone',
+        'id_phong'
     ];
 
+    public $sortable = ['birth_day', 'created_at'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -46,4 +49,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeStatus($query, $type)
+    {
+        return $query->where('status', $type);
+    }
 }

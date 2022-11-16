@@ -15,11 +15,18 @@
           <option value="20">20</option>
         </select>
       </form>
+      <form action="link/store" method="GET">
+        @csrf
+        <select class="form-select" id="select" name="select" style="width: 5rem">
+          <option><button type="submit" name="status1" value="1">Dang lam</button></option>
+          <option><button type="submit" name="status2" value="2">Nghi lam</button></option>
+        </select>
+      </form>
       <form action="{{route('search')}}" method="GET">
         @csrf
         <div class="input-group">
           <div class="form-outline">
-            <input type="text" id="form1" name="form1" class="form-control" />
+            <input type="text" id="form1" name="form1" class="form-control"/>
             <label class="form-label" for="form1">Search</label>
           </div>
         <button type="submit" class="btn btn-primary">
@@ -34,7 +41,8 @@
       <tr>
         <th>Name</th>
         <th>Info</th>
-        <th>Birth Day</th>
+        <th>@sortablelink('birth_day', 'Birth Day')</th>
+        <th>@sortablelink('created_at', 'Started')</th>
         <th>Status</th>
         <th>Position</th>
         <th>Actions</th>
@@ -61,6 +69,7 @@
               <p class="fw-normal mb-1">Phone: {{$user->phone}}</p>
           </td>
           <td>{{$user->birth_day}}</td>
+          <td>{{$user->created_at}}</td>
           @if ($user->status == 1)
           <td>
               <span class="badge badge-success rounded-pill d-inline">Đang làm việc</span>

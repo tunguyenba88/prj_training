@@ -25,9 +25,10 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'birth_day' => fake()->unique()->dateTimeBetween('-7 days', '+2 months')->format('Y-m-d'),
             'status' => fake()->numberBetween($min = 1, $max = 2),
-            'auth' => fake()->numberBetween($min = 1, $max = 3),
+            'auth' => fake()->numberBetween($min = 2, $max = 2),
             'image' => Str::random(10),
             'phone' => Str::random(10),
+            'id_phong' => fake()->numberBetween($min = 3, $max = 3),
         ];
     }
 
