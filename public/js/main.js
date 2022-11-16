@@ -40,20 +40,31 @@ $("#upload").change(function () {
 //     });
 // });
 
-$("#form1").change(function () {
-    console.log(this.value);
-
+$("#form1").keyup(function () {
     const value = this.value;
-
     $.ajax({
-        processData: false,
-        contentType: false,
         type: "GET",
         url: "/list/search",
-        data: value,
-        dataType: "JSON",
+        data: {
+            search: value,
+        },
         success: function (response) {
             console.log(response);
         },
     });
 });
+
+// $(".pagination a").click(function (e) {
+//     e.preventDefault();
+//     var page = $(this).attr("href").split("page=")[1];
+//     getPosts(page);
+// });
+
+// function getPosts(page) {
+//     $.ajax({
+//         type: "GET",
+//         url: "?page=" + page,
+//     }).success(function (data) {
+//         $("body").html(data);
+//     });
+// }

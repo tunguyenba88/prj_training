@@ -31,11 +31,10 @@ class ListEmployeeController extends Controller
 
     public function search(Request $request)
     {
-        $request = $this->search->store($request);
-        dd($request);
+        $data = $this->search->store($request->search);
         return response()->json([
             'error' => false,
-            'url'   => $request,
+            'data'   => $data,
         ]);
     }
 }
