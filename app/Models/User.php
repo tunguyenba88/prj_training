@@ -23,11 +23,12 @@ class User extends Authenticatable
         'email',
         'password',
         'birth_day',
+        'start_at',
         'status',
         'auth',
         'image',
         'phone',
-        'id_phong'
+        'room_id'
     ];
 
     public $sortable = ['birth_day', 'created_at'];
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function scopeDeActive($query)
+    {
+        return $query->where('status', 2);
     }
 }

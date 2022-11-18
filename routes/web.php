@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ListEmployeeController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
@@ -31,7 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/update_profile', [ProfileController::class, 'updateProfile'])->name('update_profile');
     Route::post('/upload/store', [UploadController::class, 'store']);
     Route::group(['middleware' => ['verified-account']], function () {
-        Route::get('/list', [ListEmployeeController::class, 'store'])->name('list');
-        Route::get('/list/search', [ListEmployeeController::class, 'search'])->name('search');
+        Route::group(['prefix' => 'list'], function () {
+            Route::get('/', [EmployeeController::class, 'store']);
+            Route::get('/sort', [EmployeeController::class, 'sort']);
+            Route::get('/search', [EmployeeController::class, 'search'])->name('search');
+            Route::get('/filter/room', [EmployeeController::class, 'filterRoom'])->name('filter.room');
+            Route::delete('/destroy', [EmployeeController::class, 'destroy']);
+            Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);
+            Route::post('/edit/{user}', [EmployeeController::class, 'edit']);
+        });
     });
 });
