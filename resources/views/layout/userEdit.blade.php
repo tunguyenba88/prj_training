@@ -9,7 +9,7 @@
           <h5 class="modal-title">Edit Profile</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{route('update_profile')}}" method="POST">
+        <form action="{{route('updateProfile')}}" method="POST">
         @csrf
         <div class="form-outline mb-4">
             <input type="date" id="birth_day1" name="birth_day1" class="form-control" value="{{$user->birth_day}}"/>
@@ -30,3 +30,4 @@
   </div>
 
   {{-- @yield('modal_user') --}}
+  
