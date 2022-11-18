@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +16,12 @@ class ProfileController extends Controller
         $user = Auth::user();
         return view('profile', ['user' => $user]);
     }
-
-    public function updateProfile(Request $request)
+    public function updateProfile()
+    {
+        $user = Auth::user();
+        return view('layout.userEdit', ['user' => $user]);
+    }
+    public function updateProfileCustom(ChangeProfileRequest $request)
     {
         $user_id = Auth::user()->id;
 

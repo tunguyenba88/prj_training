@@ -5,7 +5,9 @@ namespace App\Http\Services;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use \Carbon\Carbon;
 
 class EmployeeService
 {
@@ -28,11 +30,25 @@ class EmployeeService
         $user->auth = (int)$request->input('auth');
         $user->birth_day = (string)$request->input('birth_day');
         $user->start_at = (string)$request->input('start_at');
-        $user->image = (string)$request->input('image');
         $user->status = (int)$request->input('status');
         $user->phone = (string)$request->input('phone');
         $user->save();
 
+        if ($request->has('image')) {
+            $request->validate([
+                'image' => 'image|mimes:png,jpg,jpeg|max:5120'
+            ]);
+
+            $user_id = $user->id;
+
+            $imageName = time() . '-' . $user_id . '.' . $request->image->extension();
+
+            $request->image->move(public_path('images'), $imageName);
+
+            DB::table('users')
+                ->where('id', $user_id)
+                ->update(['image' => 'images/' . $imageName]);
+        }
         return true;
     }
 }

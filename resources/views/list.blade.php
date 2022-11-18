@@ -70,7 +70,7 @@
                   class="rounded-circle"
                   />
               <div class="ms-3">
-                <p class="fw-bold mb-1">{{$user->name}}</p>
+                <a class="fw-bold mb-1" href="list/profile/{{$user->id}}">{{$user->name}}</a>
               </div>
             </div> 
           </td>
@@ -115,6 +115,12 @@
   <div class="d-flex justify-content-center">
       {!! $users->appends(Request::except('page'))->render() !!}
   </div>
+
+  <form action="list/add" method="GET">
+    <button type="submit" class="btn btn-primary">
+      Add Employee
+    </button>
+  </form>
 @include('layout.footer')
 </body>
 </html>
