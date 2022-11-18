@@ -110,7 +110,7 @@ class EmployeeController extends Controller
 
                     $request->image->move(public_path('images'), $imageName);
 
-                    $user->image = 'images/' . $imageName;
+                    $user->image = '/images/' . $imageName;
                 } else {
                     $user->image = '/images/default.jpeg';
                 }

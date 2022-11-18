@@ -47,7 +47,7 @@ class EmployeeService
 
             DB::table('users')
                 ->where('id', $user_id)
-                ->update(['image' => 'images/' . $imageName]);
+                ->update(['image' => '/images/' . $imageName]);
         }
         return true;
     }

@@ -23,9 +23,9 @@ class UploadService
 
                 DB::table('users')
                     ->where('id', $user_id)
-                    ->update(['image' => 'images/' . $imageName]);
+                    ->update(['image' => '/images/' . $imageName]);
 
-                return 'images/' . $imageName;
+                return '/images/' . $imageName;
             } catch (\Exception $error) {
                 return false;
             }
