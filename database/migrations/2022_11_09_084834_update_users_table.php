@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->date('birth_day');
+            $table->date('start_at');
             $table->tinyInteger('status');
             $table->string('image');
             $table->string('phone');
             $table->tinyInteger('auth');
+            $table->tinyInteger('room_id');
         });
     }
 

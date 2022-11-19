@@ -20,7 +20,28 @@ $("#upload").change(function () {
         success: function (response) {
             if (response.error === false) {
                 $("#image-show").attr("src", response.url);
+            } else {
+                alert("Lỗi");
             }
         },
     });
 });
+
+function removeUser(id, url) {
+    if (confirm("Bạn có chắc chắn muốn xóa không")) {
+        $.ajax({
+            type: "DELETE",
+            dataType: "JSON",
+            data: { id },
+            url: url,
+            success: function (respone) {
+                console.log(respone);
+                if (respone.error === false) {
+                    location.reload();
+                } else {
+                    alert("Xóa thất bại hãy thử lại");
+                }
+            },
+        });
+    }
+}

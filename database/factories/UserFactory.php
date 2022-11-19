@@ -24,10 +24,11 @@ class UserFactory extends Factory
             'password' => bcrypt('123456'), // password
             'remember_token' => Str::random(10),
             'birth_day' => fake()->unique()->dateTimeBetween('-7 days', '+2 months')->format('Y-m-d'),
-            'status' => fake()->numberBetween($min = 2, $max = 2),
+            'status' => fake()->numberBetween($min = 1, $max = 2),
             'auth' => fake()->numberBetween($min = 3, $max = 3),
             'image' => Str::random(10),
             'phone' => Str::random(10),
+            'room_id' => fake()->numberBetween($min = 1, $max = 3),
         ];
     }
 
