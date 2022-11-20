@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('room_name');
-            $table->tinyInteger('manager_id');
+            $table->tinyInteger('manager_id')->nullable(true);
+            $table->string('description')->nullable(true);
             $table->timestamps();
         });
     }

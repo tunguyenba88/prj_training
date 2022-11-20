@@ -45,3 +45,22 @@ function removeUser(id, url) {
         });
     }
 }
+
+function removeRoom(id, url) {
+    if (confirm("Bạn có chắc chắn muốn xóa không")) {
+        $.ajax({
+            type: "DELETE",
+            dataType: "JSON",
+            data: { id },
+            url: url,
+            success: function (respone) {
+                console.log(respone);
+                if (respone.error === false) {
+                    location.reload();
+                } else {
+                    alert("Phòng có nhân viên không thể xóa");
+                }
+            },
+        });
+    }
+}

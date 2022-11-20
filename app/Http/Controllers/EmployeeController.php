@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateFormRequest;
 use App\Http\Services\EmployeeService;
+use App\Models\Room;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,19 +22,10 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        $room = 0;
-        if ($request->select) {
-            $select = intval($request->select);
-            if ($select == 1) {
-                $users = User::sortable()->active()->paginate(5);
-            } else {
-                $users = User::sortable()->deActive()->paginate(5);
-            }
-            return view('list', compact('users'))->with('select', $select)->with('room', $room);
-        }
-        $select = 0;
+        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+
         $users = User::sortable()->paginate(5);
-        return view('list', compact('users'))->with('select', $select)->with('room', $room);
+        return view('list', compact('users'))->with('rooms', $rooms);
     }
 
     public function sort()
@@ -50,20 +42,28 @@ class EmployeeController extends Controller
         } else {
             $users = User::sortable()->paginate(5);
         }
-        return view('list')->with('users', $users)->with('users', $users)->with('param', $filter);
+        return view('list')->with('users', $users)->with('param', $filter);
     }
 
-    public function filterRoom(Request $request)
+    public function filter(Request $request)
     {
-        $select = 0;
-        if ($request->room) {
-            $room = intval($request->room);
-            $users = User::sortable()->where('room_id', $room)->paginate(5);
-            return view('list', compact('users'))->with('room', $room)->with('select', $select);
+        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+
+        $status = intval($request->status);
+        $room = intval($request->room);
+        if ($status && $room) {
+            $users = User::sortable()->where('room_id', $room)->where('status', $status)->paginate(5);
         }
-        $room = 0;
-        $users = User::sortable()->paginate(5);
-        return view('list', compact('users'))->with('room', $room)->with('select', $select);
+        if (!$room && !$status) {
+            $users = User::sortable()->paginate(5);
+        }
+        if ($room && !$status) {
+            $users = User::sortable()->where('room_id', $room)->paginate(5);
+        }
+        if (!$room && $status) {
+            $users = User::sortable()->where('status', $status)->paginate(5);
+        }
+        return view('list', compact('users'))->with('rooms', $rooms);
     }
 
     public function destroy(Request $request)
@@ -88,7 +88,7 @@ class EmployeeController extends Controller
 
     public function add(CreateFormRequest $request)
     {
-        $checkEmail = DB::table('users')->where('email', (string)$request->input('email'))->first();
+        $checkEmail = User::where('email', (string)$request->input('email'))->first();
         if (!$checkEmail) {
             try {
                 $user = new User();

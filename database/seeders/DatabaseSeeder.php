@@ -165,16 +165,19 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Room::factory(1)->create([
             'room_name' => fake()->name(),
+            'description' => fake()->name(),
             'manager_id' => 2,
         ]);
 
         \App\Models\Room::factory(1)->create([
             'room_name' => fake()->name(),
+            'description' => fake()->name(),
             'manager_id' => 7,
         ]);
 
         \App\Models\Room::factory(1)->create([
             'room_name' => fake()->name(),
+            'description' => fake()->name(),
             'manager_id' => 10,
         ]);
     }

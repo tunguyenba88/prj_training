@@ -59,7 +59,7 @@
             <input type="text" name="phone" id="phone" class="form-control"/>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">Save Change</button>
+          <button type="submit" class="btn btn-primary btn-block mb-4">Add</button>
           <div class="form-outline mb-4">
             @include('layout.alert')  
           </div>

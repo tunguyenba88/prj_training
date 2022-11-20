@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +26,7 @@ class ProfileController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        DB::table('users')
-            ->where('id', $user_id)
+        User::where('id', $user_id)
             ->update(['birth_day' => $request->birth_day1, 'phone' => $request->phone1]);
         return redirect('profile');
     }
@@ -40,7 +40,7 @@ class ProfileController extends Controller
     {
 
         $user_id = Auth::user()->id;
-        $password = DB::table('users')->where('id', $user_id)->first('password');
+        $password = User::where('id', $user_id)->first('password');
         $current_password = $request->current_password;
         if (!(Hash::check($current_password, $password->password))) {
             return redirect()->back()->with("error", "Nhập sai mật khẩu");
@@ -50,9 +50,7 @@ class ProfileController extends Controller
             return redirect()->back()->with("error", "Trùng với mật khẩu cũ");
         }
 
-        DB::table('users')
-            ->where('id', $user_id)
-            ->update(['password' => bcrypt($new_password)]);
+        User::where('id', $user_id)->update(['password' => bcrypt($new_password)]);
 
         return redirect('profile')->with("success", "Đổi mật khẩu thành công !");
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,12 +40,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/sort', [EmployeeController::class, 'sort']);
             Route::get('/profile/{user}', [EmployeeController::class, 'viewProfile']);
             Route::get('/search', [EmployeeController::class, 'search'])->name('search');
-            Route::get('/filter/room', [EmployeeController::class, 'filterRoom'])->name('filter.room');
+            Route::get('/filter', [EmployeeController::class, 'filter'])->name('filter');
             Route::delete('/destroy', [EmployeeController::class, 'destroy']);
             Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);
             Route::post('/edit/{user}', [EmployeeController::class, 'edit']);
             Route::get('/add', [EmployeeController::class, 'viewAdd']);
             Route::post('/add/store', [EmployeeController::class, 'add']);
+        });
+        Route::group(['prefix' => 'room'], function () {
+            Route::get('/', [RoomController::class, 'index']);
+            Route::get('/add', [RoomController::class, 'viewAdd']);
+            Route::post('/add/store', [RoomController::class, 'store']);
+            Route::get('/edit/{room}', [RoomController::class, 'show']);
+            Route::post('/edit/{room}', [RoomController::class, 'edit']);
+            Route::delete('/destroy', [RoomController::class, 'destroy']);
         });
     });
 });
