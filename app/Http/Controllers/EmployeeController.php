@@ -36,13 +36,14 @@ class EmployeeController extends Controller
 
     public function search(Request $request)
     {
+        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
         $filter = $request->query('form1');
         if (!empty($filter)) {
             $users = User::sortable()->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
         } else {
             $users = User::sortable()->paginate(5);
         }
-        return view('list')->with('users', $users)->with('param', $filter);
+        return view('list')->with('users', $users)->with('param', $filter)->with('rooms', $rooms);
     }
 
     public function filter(Request $request)
@@ -83,7 +84,9 @@ class EmployeeController extends Controller
 
     public function viewAdd()
     {
-        return view('add');
+        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+
+        return view('add')->with('rooms', $rooms);
     }
 
     public function add(CreateFormRequest $request)
