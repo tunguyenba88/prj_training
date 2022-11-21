@@ -42,6 +42,19 @@
                     </form>
                 </ul>
             </div>
+            @if (Auth::user()->id == 1)
+                <form action="{{ route('import-csv') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="submit" value="Import CSV" name="file" class="btn btn-warning">
+                    <input type="file" name="file" accept=".xlsx">
+                </form>
+            @endif
+
+            <form action="{{ route('export-csv') }}" method="POST">
+                @csrf
+                <input type="submit" value="Export CSV" name="export_csv" class="btn btn-success">
+            </form>
+
             <form action="{{ route('search') }}" method="GET">
                 @csrf
                 <div class="input-group">
@@ -66,7 +79,9 @@
                 <th>@sortablelink('created_at', 'Started')</th>
                 <th>Status</th>
                 <th>Position</th>
-                <th>Actions</th>
+                @if (Auth::user()->id == 1)
+                    <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -106,16 +121,24 @@
                     @if ($user->auth == 3)
                         <td>Nhân viên</td>
                     @endif
-                    <td>
-                        <a type="button" class="btn btn-primary btn-rounded" href="/list/edit/{{ $user->id }}">
-                            Edit
-                        </a>
+                    @if (Auth::user()->id == 1)
+                        <td>
+                            <a type="button" class="btn btn-primary btn-rounded"
+                                href="/list/edit/{{ $user->id }}">
+                                Edit
+                            </a>
 
-                        <button type="button" class="btn btn-danger btn-rounded"
-                            onclick="removeUser({{ $user->id }}, 'list/destroy')">
-                            Delete
-                        </button>
-                    </td>
+                            <button type="button" class="btn btn-danger btn-rounded"
+                                onclick="removeUser({{ $user->id }}, 'list/destroy')">
+                                Delete
+                            </button>
+
+                            <button type="button" class="btn btn-success btn-rounded"
+                                onclick="resetPassword('{{ $user->email }}', 'reset/password')">
+                                Reset
+                            </button>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
@@ -123,12 +146,13 @@
     <div class="d-flex justify-content-center">
         {!! $users->appends(Request::except('page'))->render() !!}
     </div>
-
-    <form action="list/add" method="GET">
-        <button type="submit" class="btn btn-primary">
-            Add Employee
-        </button>
-    </form>
+    @if (Auth::user()->id == 1)
+        <form action="list/add" method="GET">
+            <button type="submit" class="btn btn-primary">
+                Add Employee
+            </button>
+        </form>
+    @endif
     @include('layout.footer')
 </body>
 

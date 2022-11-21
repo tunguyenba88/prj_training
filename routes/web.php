@@ -38,22 +38,32 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'list'], function () {
             Route::get('/', [EmployeeController::class, 'store']);
             Route::get('/sort', [EmployeeController::class, 'sort']);
-            Route::get('/profile/{user}', [EmployeeController::class, 'viewProfile']);
+            Route::post('/export-csv', [EmployeeController::class, 'export_csv'])->name('export-csv');
             Route::get('/search', [EmployeeController::class, 'search'])->name('search');
             Route::get('/filter', [EmployeeController::class, 'filter'])->name('filter');
-            Route::delete('/destroy', [EmployeeController::class, 'destroy']);
-            Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);
-            Route::post('/edit/{user}', [EmployeeController::class, 'edit']);
-            Route::get('/add', [EmployeeController::class, 'viewAdd']);
-            Route::post('/add/store', [EmployeeController::class, 'add']);
+            Route::get('/profile/{user}', [EmployeeController::class, 'viewProfile']);
+            Route::group(['middleware' => ['verified-admin']], function () {
+                Route::post('/import-csv', [EmployeeController::class, 'import_csv'])->name('import-csv');
+                Route::delete('/destroy', [EmployeeController::class, 'destroy']);
+                Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);
+                Route::post('/edit/{user}', [EmployeeController::class, 'edit']);
+                Route::get('/add', [EmployeeController::class, 'viewAdd']);
+                Route::post('/add/store', [EmployeeController::class, 'add']);
+            });
         });
-        Route::group(['prefix' => 'room'], function () {
-            Route::get('/', [RoomController::class, 'index']);
-            Route::get('/add', [RoomController::class, 'viewAdd']);
-            Route::post('/add/store', [RoomController::class, 'store']);
-            Route::get('/edit/{room}', [RoomController::class, 'show']);
-            Route::post('/edit/{room}', [RoomController::class, 'edit']);
-            Route::delete('/destroy', [RoomController::class, 'destroy']);
+        Route::group(['middleware' => ['verified-admin']], function () {
+            Route::group(['prefix' => 'room'], function () {
+                Route::get('/', [RoomController::class, 'index']);
+                Route::get('/add', [RoomController::class, 'viewAdd']);
+                Route::post('/add/store', [RoomController::class, 'store']);
+                Route::get('/edit/{room}', [RoomController::class, 'show']);
+                Route::post('/edit/{room}', [RoomController::class, 'edit']);
+                Route::delete('/destroy', [RoomController::class, 'destroy']);
+            });
         });
+    });
+    Route::group(['middleware' => ['verified-admin']], function () {
+        Route::post('/reset/password', [ResetPasswordController::class, 'sendMail']);
+        Route::put('/reset/password/{token}', [ResetPasswordController::class, 'reset']);
     });
 });

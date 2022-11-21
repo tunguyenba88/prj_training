@@ -64,3 +64,23 @@ function removeRoom(id, url) {
         });
     }
 }
+
+function resetPassword(email, url) {
+    console.log(email);
+    if (confirm("Bạn có chắc chắn muốn reset không")) {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            data: { email },
+            url: url,
+            success: function (respone) {
+                console.log(respone);
+                if (respone.error === false) {
+                    alert("Gửi mail thành công");
+                } else {
+                    alert("Gửi mail thất bại");
+                }
+            },
+        });
+    }
+}

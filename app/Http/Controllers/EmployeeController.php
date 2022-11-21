@@ -10,6 +10,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+
 
 class EmployeeController extends Controller
 {
@@ -103,7 +107,7 @@ class EmployeeController extends Controller
                 $user->start_at = (string)$request->input('start_at');
                 $user->status = (int)$request->input('status');
                 $user->phone = (string)$request->input('phone');
-                $user->password = 123456;
+                $user->password = bcrypt(123456);
                 if ($request->has('image')) {
                     $request->validate([
                         'image' => 'image|mimes:png,jpg,jpeg|max:5120'
@@ -141,5 +145,16 @@ class EmployeeController extends Controller
         $this->employeeService->edit($request, $user);
 
         return redirect('list');
+    }
+
+    public function export_csv()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function import_csv(Request $request)
+    {
+        $import = Excel::import(new UsersImport, $request->file('file'));
+        return redirect()->back();
     }
 }
