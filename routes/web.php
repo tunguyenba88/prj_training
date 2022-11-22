@@ -4,6 +4,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
@@ -63,7 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     Route::group(['middleware' => ['verified-admin']], function () {
-        Route::post('/reset/password', [ResetPasswordController::class, 'sendMail']);
-        Route::put('/reset/password/{token}', [ResetPasswordController::class, 'reset']);
+        Route::post('/reset/password', [ResetPasswordController::class, 'sendMail'])->name('resetPassword');
     });
 });

@@ -132,11 +132,13 @@
                                 onclick="removeUser({{ $user->id }}, 'list/destroy')">
                                 Delete
                             </button>
-
-                            <button type="button" class="btn btn-success btn-rounded"
-                                onclick="resetPassword('{{ $user->email }}', 'reset/password')">
-                                Reset
-                            </button>
+                            <form action="{{ route('resetPassword') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $user->email }}" name="email">
+                                <button type="submit" class="btn btn-success btn-rounded">
+                                    Reset
+                                </button>
+                            </form>
                         </td>
                     @endif
                 </tr>
