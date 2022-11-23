@@ -16,13 +16,18 @@ class ResetPasswordController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         $password = Str::random(10);
+        $listUser = array();
+        $messages = array();
         User::where('email', $request->email)->update(['password' => bcrypt($password)]);
         $message = [
             'title' => 'Reset Password',
+            'task' => 'New Password',
             'data' => $password,
         ];
+        array_push($listUser, $user);
+        array_push($messages, $message);
 
-        $job = (new SendEmail($message,  $user));
+        $job = (new SendEmail($messages, $listUser));
         $this->dispatch($job);
 
         return redirect()->back();

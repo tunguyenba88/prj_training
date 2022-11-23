@@ -13,4 +13,9 @@ class Room extends Model
         'name',
         'manager_id',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'room_id', 'id');
+    }
 }

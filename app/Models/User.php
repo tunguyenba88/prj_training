@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $query->where('status', 2);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
+    }
 }

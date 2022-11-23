@@ -12,22 +12,22 @@ use Illuminate\Queue\SerializesModels;
 class MailNotify extends Mailable
 {
     use Queueable, SerializesModels;
-    public $message;
+    public $messages;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($messages)
     {
-        $this->message = $message;
+        $this->messages = $messages;
     }
 
     public function build()
     {
         return $this->from(config('mail.from.address'))
-            ->view('mails.sendMail', ['data' => $this->message])->subject($this->message['title']);
+            ->view('mails.sendMail', ['data' => $this->messages])->subject($this->messages['title']);
     }
 
 
