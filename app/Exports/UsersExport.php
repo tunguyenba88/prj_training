@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class UsersExport implements FromCollection
@@ -12,6 +13,10 @@ class UsersExport implements FromCollection
      */
     public function collection()
     {
-        return User::all();
+        if (Auth::user()->id == 1) {
+            return User::all();
+        } else {
+            return User::where('room_id', Auth::user()->room_id)->get();
+        }
     }
 }

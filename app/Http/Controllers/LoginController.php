@@ -10,8 +10,7 @@ class LoginController extends Controller
 {
     public function store(Request $request)
     {
-        // dd($request->input());
-        $remember = $request->input('remember');
+        $remember = isset($request->checkbox) ? true : false;
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',

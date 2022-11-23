@@ -149,7 +149,7 @@
         {!! $users->appends(Request::except('page'))->render() !!}
     </div>
     @if (Auth::user()->id == 1)
-        <form action="list/add" method="GET">
+        <form action="{{ route('addUser') }}" method="GET">
             <button type="submit" class="btn btn-primary">
                 Add Employee
             </button>

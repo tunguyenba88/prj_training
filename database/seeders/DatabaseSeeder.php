@@ -146,7 +146,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 2,
+            'room_id' => 3,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -161,7 +161,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 2,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 2,
+            'room_id' => 3,
         ]);
         \App\Models\Room::factory(1)->create([
             'room_name' => fake()->name(),

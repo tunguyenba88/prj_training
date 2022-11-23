@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::delete('/destroy', [EmployeeController::class, 'destroy']);
                 Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);
                 Route::post('/edit/{user}', [EmployeeController::class, 'edit']);
-                Route::get('/add', [EmployeeController::class, 'viewAdd']);
+                Route::get('/add', [EmployeeController::class, 'viewAdd'])->name('addUser');
                 Route::post('/add/store', [EmployeeController::class, 'add']);
             });
         });

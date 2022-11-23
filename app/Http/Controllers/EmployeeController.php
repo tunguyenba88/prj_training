@@ -27,8 +27,11 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
-
-        $users = User::sortable()->paginate(5);
+        if (Auth::user()->id == 1) {
+            $users = User::sortable()->paginate(5);
+        } else {
+            $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+        }
         return view('list', compact('users'))->with('rooms', $rooms);
     }
 
@@ -42,11 +45,20 @@ class EmployeeController extends Controller
     {
         $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
         $filter = $request->query('form1');
-        if (!empty($filter)) {
-            $users = User::sortable()->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
+        if (Auth::user()->id == 1) {
+            if (!empty($filter)) {
+                $users = User::sortable()->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
+            } else {
+                $users = User::sortable()->paginate(5);
+            }
         } else {
-            $users = User::sortable()->paginate(5);
+            if (!empty($filter)) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
+            } else {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+            }
         }
+
         return view('list')->with('users', $users)->with('param', $filter)->with('rooms', $rooms);
     }
 
@@ -56,18 +68,34 @@ class EmployeeController extends Controller
 
         $status = intval($request->status);
         $room = intval($request->room);
-        if ($status && $room) {
-            $users = User::sortable()->where('room_id', $room)->where('status', $status)->paginate(5);
+        if (Auth::user()->id == 1) {
+            if ($status && $room) {
+                $users = User::sortable()->where('room_id', $room)->where('status', $status)->paginate(5);
+            }
+            if (!$room && !$status) {
+                $users = User::sortable()->paginate(5);
+            }
+            if ($room && !$status) {
+                $users = User::sortable()->where('room_id', $room)->paginate(5);
+            }
+            if (!$room && $status) {
+                $users = User::sortable()->where('status', $status)->paginate(5);
+            }
+        } else {
+            if ($status && $room) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('status', $status)->paginate(5);
+            }
+            if (!$room && !$status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+            }
+            if ($room && !$status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('room_id', $room)->paginate(5);
+            }
+            if (!$room && $status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('status', $status)->paginate(5);
+            }
         }
-        if (!$room && !$status) {
-            $users = User::sortable()->paginate(5);
-        }
-        if ($room && !$status) {
-            $users = User::sortable()->where('room_id', $room)->paginate(5);
-        }
-        if (!$room && $status) {
-            $users = User::sortable()->where('status', $status)->paginate(5);
-        }
+
         return view('list', compact('users'))->with('rooms', $rooms);
     }
 
