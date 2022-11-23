@@ -180,9 +180,14 @@ class EmployeeController extends Controller
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
+    public function import()
+    {
+        return view('imports.import');
+    }
+
     public function import_csv(Request $request)
     {
-        $import = Excel::import(new UsersImport, $request->file('file'));
+        Excel::import(new UsersImport, $request->file('file'));
         return redirect()->back();
     }
 }

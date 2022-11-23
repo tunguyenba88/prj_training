@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/filter', [EmployeeController::class, 'filter'])->name('filter');
             Route::get('/profile/{user}', [EmployeeController::class, 'viewProfile']);
             Route::group(['middleware' => ['verified-admin']], function () {
+                Route::get('/import', [EmployeeController::class, 'import'])->name('import');
                 Route::post('/import-csv', [EmployeeController::class, 'import_csv'])->name('import-csv');
                 Route::delete('/destroy', [EmployeeController::class, 'destroy']);
                 Route::get('/edit/{user}', [EmployeeController::class, 'viewEdit']);

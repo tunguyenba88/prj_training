@@ -43,10 +43,10 @@
                 </ul>
             </div>
             @if (Auth::user()->id == 1)
-                <form action="{{ route('import-csv') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="submit" value="Import CSV" name="file" class="btn btn-warning">
-                    <input type="file" name="file" accept=".xlsx">
+                <form action="{{ route('import') }}" method="GET">
+                    <button type="submit" class="btn btn-primary">
+                        Import CSV
+                    </button>
                 </form>
             @endif
 
