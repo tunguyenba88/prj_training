@@ -21,9 +21,9 @@
                 <label class="" for="name">Room</label>
                 <select class="form-select" id="room" name="room">
                     <option value="">Select Room</option>
-                    @foreach ($rooms as $room)
-                        <option value="{{ $room->id }}">
-                            {{ $room->room_name }}
+                    @foreach ($departments as $department)
+                        <option value="{{ $department->id }}">
+                            {{ $department->department_name }}
                         </option>
                     @endforeach
                 </select>

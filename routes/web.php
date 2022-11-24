@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/change_password/store', [ProfileController::class, 'changePasswordCustom'])->name('changePasswordCustom');
     Route::post('/upload/store', [UploadController::class, 'store']);
     Route::group(['middleware' => ['verified-account']], function () {
-        Route::group(['prefix' => 'list'], function () {
+        Route::group(['prefix' => 'employees'], function () {
             Route::get('/', [EmployeeController::class, 'store']);
             Route::get('/sort', [EmployeeController::class, 'sort']);
             Route::post('/export-csv', [EmployeeController::class, 'export_csv'])->name('export-csv');
@@ -54,13 +54,13 @@ Route::group(['middleware' => ['auth']], function () {
             });
         });
         Route::group(['middleware' => ['verified-admin']], function () {
-            Route::group(['prefix' => 'room'], function () {
-                Route::get('/', [RoomController::class, 'index']);
-                Route::get('/add', [RoomController::class, 'viewAdd']);
-                Route::post('/add/store', [RoomController::class, 'store']);
-                Route::get('/edit/{room}', [RoomController::class, 'show']);
-                Route::post('/edit/{room}', [RoomController::class, 'edit']);
-                Route::delete('/destroy', [RoomController::class, 'destroy']);
+            Route::group(['prefix' => 'department'], function () {
+                Route::get('/', [DepartmentController::class, 'index']);
+                Route::get('/add', [DepartmentController::class, 'viewAdd']);
+                Route::post('/add/store', [DepartmentController::class, 'store']);
+                Route::get('/edit/{department}', [DepartmentController::class, 'show']);
+                Route::post('/edit/{department}', [DepartmentController::class, 'edit']);
+                Route::delete('/destroy', [DepartmentController::class, 'destroy']);
             });
         });
     });

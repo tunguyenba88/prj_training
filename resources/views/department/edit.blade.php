@@ -11,17 +11,18 @@
             @csrf
             <div class="form-outline mb-4">
                 <label class="" for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ $room->room_name }}" />
+                <input type="text" name="department_name" id="department_name" class="form-control"
+                    value="{{ $department->department_name }}" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="description">Description</label>
                 <input type="text" name="description" id="description" class="form-control"
-                    value="{{ $room->description }}" />
+                    value="{{ $department->description }}" />
             </div>
             <select name="manager" class="form-select" id="manager">
                 <option value="">Select Manager</option>
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $user->id == $room->manager_id ? 'selected' : '' }}>
+                    <option value="{{ $user->id }}" {{ $user->id == $department->manager_id ? 'selected' : '' }}>
                         {{ $user->name }}
                     </option>
                 @endforeach

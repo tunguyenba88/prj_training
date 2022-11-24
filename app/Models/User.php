@@ -28,7 +28,7 @@ class User extends Authenticatable
         'auth',
         'image',
         'phone',
-        'room_id'
+        'department_id'
     ];
 
     public $sortable = ['birth_day', 'created_at'];
@@ -63,6 +63,6 @@ class User extends Authenticatable
 
     public function department()
     {
-        return $this->belongsTo(Room::class, 'room_id', 'id');
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 }

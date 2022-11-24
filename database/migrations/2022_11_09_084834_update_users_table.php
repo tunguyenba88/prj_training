@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('phone');
             $table->tinyInteger('auth');
-            $table->tinyInteger('room_id');
+            $table->tinyInteger('department_id');
         });
     }
 

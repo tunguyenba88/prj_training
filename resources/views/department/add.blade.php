@@ -11,7 +11,7 @@
             @csrf
             <div class="form-outline mb-4">
                 <label class="" for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control" />
+                <input type="text" name="department_name" id="department_name" class="form-control" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="description">Description</label>

@@ -27,9 +27,9 @@
                         <li>
                             <select class="form-select" id="room" name="room">
                                 <option value="">Select Room</option>
-                                @foreach ($rooms as $room)
-                                    <option value="{{ $room->id }}">
-                                        {{ $room->room_name }}
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">
+                                        {{ $department->department_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -124,12 +124,12 @@
                     @if (Auth::user()->id == 1)
                         <td>
                             <a type="button" class="btn btn-primary btn-rounded"
-                                href="/list/edit/{{ $user->id }}">
+                                href="/employees/edit/{{ $user->id }}">
                                 Edit
                             </a>
 
                             <button type="button" class="btn btn-danger btn-rounded"
-                                onclick="removeUser({{ $user->id }}, 'list/destroy')">
+                                onclick="removeUser({{ $user->id }}, 'employees/destroy')">
                                 Delete
                             </button>
                             <form action="{{ route('resetPassword') }}" method="POST">

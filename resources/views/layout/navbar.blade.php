@@ -8,12 +8,12 @@
                 </li>
                 @if (Auth::user()->id < 3)
                     <li class="nav-item">
-                        <a class="nav-link" href="/list">List User</a>
+                        <a class="nav-link" href="/employees">List User</a>
                     </li>
                 @endif
                 @if (Auth::user()->id == 1)
                     <li class="nav-item">
-                        <a class="nav-link" href="/room">Room</a>
+                        <a class="nav-link" href="/department">Department</a>
                     </li>
                 @endif
             </ul>

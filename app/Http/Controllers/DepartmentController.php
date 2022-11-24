@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RoomRequest;
-use App\Http\Services\RoomService;
-use App\Models\Room;
+use App\Http\Requests\DepartmentRequest;
+use App\Http\Services\DepartmentService;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class DepartmentController extends Controller
 {
-    protected $roomService;
+    protected $departmentService;
 
-    public function __construct(RoomService $roomService)
+    public function __construct(DepartmentService $departmentService)
     {
-        $this->roomService = $roomService;
+        $this->departmentService = $departmentService;
     }
     /**
      * Display a listing of the resource.
@@ -23,8 +23,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::leftJoin('users', 'rooms.manager_id', '=', 'users.id')->select('rooms.*', 'users.name')->paginate(5);
-        return view('room.room')->with('rooms', $rooms);
+        $departments = Department::leftJoin('users', 'departments.manager_id', '=', 'users.id')->select('departments.*', 'users.name')->paginate(5);
+        return view('department.list')->with('departments', $departments);
     }
 
     /**
@@ -36,7 +36,7 @@ class RoomController extends Controller
     public function viewAdd()
     {
         $users = User::where('auth', 2)->select('users.name', 'users.id')->get();
-        return view('room.add')->with('users', $users);
+        return view('department.add')->with('users', $users);
     }
 
     /**
@@ -45,15 +45,15 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
         // dd($request->all());
-        $room = new Room();
-        $room->room_name = (string)$request->input('name');
-        $room->description = (string)$request->input('description');
-        $room->manager_id = (int)$request->input('manager');
-        $room->save();
-        return redirect('room')->with('success', "Insert successfully");
+        $department = new Department();
+        $department->department_name = (string)$request->input('department_name');
+        $department->description = (string)$request->input('description');
+        $department->manager_id = (int)$request->input('manager');
+        $department->save();
+        return redirect('department')->with('success', "Insert successfully");
     }
 
     /**
@@ -62,10 +62,10 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show(Department $department)
     {
         $users = User::where('auth', 2)->select('users.name', 'users.id')->get();
-        return view('room.edit')->with('room', $room)->with('users', $users);
+        return view('department.edit')->with('department', $department)->with('users', $users);
     }
 
     /**
@@ -74,11 +74,11 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room, RoomRequest $request)
+    public function edit(Department $department, DepartmentRequest $request)
     {
-        $this->roomService->edit($request, $room);
+        $this->departmentService->edit($request, $department);
 
-        return redirect('room');
+        return redirect('department');
     }
 
     /**
@@ -101,7 +101,7 @@ class RoomController extends Controller
      */
     public function destroy(Request $request)
     {
-        $result = $this->roomService->destroy($request);
+        $result = $this->departmentService->destroy($request);
 
         if ($result) {
             return response()->json([

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 1,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 1,
+            'department_id' => 1,
         ]);
         \App\Models\User::factory(1)->create([
             'name' => fake()->name(),
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 2,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 1,
+            'department_id' => 1,
         ]);
         \App\Models\User::factory(1)->create([
             'name' => fake()->name(),
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 1,
+            'department_id' => 1,
         ]);
         \App\Models\User::factory()->create([
             'name' => fake()->name(),
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 1,
+            'department_id' => 1,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 2,
+            'department_id' => 2,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 2,
+            'department_id' => 2,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 2,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 2,
+            'department_id' => 2,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 3,
+            'department_id' => 3,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -146,7 +146,7 @@ class DatabaseSeeder extends Seeder
             'auth' => 3,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 3,
+            'department_id' => 3,
         ]);
 
         \App\Models\User::factory(1)->create([
@@ -161,22 +161,22 @@ class DatabaseSeeder extends Seeder
             'auth' => 2,
             'image' => '/images/default.jpeg',
             'phone' => Str::random(10),
-            'room_id' => 3,
+            'department_id' => 3,
         ]);
-        \App\Models\Room::factory(1)->create([
-            'room_name' => fake()->name(),
+        \App\Models\Department::factory(1)->create([
+            'department_name' => fake()->name(),
             'description' => fake()->name(),
             'manager_id' => 2,
         ]);
 
-        \App\Models\Room::factory(1)->create([
-            'room_name' => fake()->name(),
+        \App\Models\Department::factory(1)->create([
+            'department_name' => fake()->name(),
             'description' => fake()->name(),
             'manager_id' => 7,
         ]);
 
-        \App\Models\Room::factory(1)->create([
-            'room_name' => fake()->name(),
+        \App\Models\Department::factory(1)->create([
+            'department_name' => fake()->name(),
             'description' => fake()->name(),
             'manager_id' => 10,
         ]);

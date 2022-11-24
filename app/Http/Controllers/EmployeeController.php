@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateFormRequest;
 use App\Http\Services\EmployeeService;
-use App\Models\Room;
+use App\Models\Department;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,24 +26,24 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+        $departments = Department::select('departments.department_name', 'departments.id')->get();
         if (Auth::user()->id == 1) {
             $users = User::sortable()->paginate(5);
         } else {
-            $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+            $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->paginate(5);
         }
-        return view('list', compact('users'))->with('rooms', $rooms);
+        return view('employees.list', compact('users'))->with('departments', $departments);
     }
 
     public function sort()
     {
         $users = User::sortable()->paginate(5);
-        return view('list')->with('users', $users);
+        return view('employees.list')->with('users', $users);
     }
 
     public function search(Request $request)
     {
-        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+        $departments = Department::select('departments.department_name', 'departments.id')->get();
         $filter = $request->query('form1');
         if (Auth::user()->id == 1) {
             if (!empty($filter)) {
@@ -53,50 +53,50 @@ class EmployeeController extends Controller
             }
         } else {
             if (!empty($filter)) {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->where('name', 'LIKE', '%' . $filter . '%')->paginate(5);
             } else {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->paginate(5);
             }
         }
 
-        return view('list')->with('users', $users)->with('param', $filter)->with('rooms', $rooms);
+        return view('employees.list')->with('users', $users)->with('param', $filter)->with('departments', $departments);
     }
 
     public function filter(Request $request)
     {
-        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+        $departments = Department::select('departments.department_name', 'departments.id')->get();
 
         $status = intval($request->status);
-        $room = intval($request->room);
+        $department = intval($request->room);
         if (Auth::user()->id == 1) {
-            if ($status && $room) {
-                $users = User::sortable()->where('room_id', $room)->where('status', $status)->paginate(5);
+            if ($status && $department) {
+                $users = User::sortable()->where('department_id', $department)->where('status', $status)->paginate(5);
             }
-            if (!$room && !$status) {
+            if (!$department && !$status) {
                 $users = User::sortable()->paginate(5);
             }
-            if ($room && !$status) {
-                $users = User::sortable()->where('room_id', $room)->paginate(5);
+            if ($department && !$status) {
+                $users = User::sortable()->where('department_id', $department)->paginate(5);
             }
-            if (!$room && $status) {
+            if (!$department && $status) {
                 $users = User::sortable()->where('status', $status)->paginate(5);
             }
         } else {
-            if ($status && $room) {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('status', $status)->paginate(5);
+            if ($status && $department) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->where('status', $status)->paginate(5);
             }
-            if (!$room && !$status) {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->paginate(5);
+            if (!$department && !$status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->paginate(5);
             }
-            if ($room && !$status) {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('room_id', $room)->paginate(5);
+            if ($department && !$status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->where('department_id', $department)->paginate(5);
             }
-            if (!$room && $status) {
-                $users = $this->employeeService->getUserRoom(Auth::user()->room_id)->where('status', $status)->paginate(5);
+            if (!$department && $status) {
+                $users = $this->employeeService->getUserRoom(Auth::user()->department_id)->where('status', $status)->paginate(5);
             }
         }
 
-        return view('list', compact('users'))->with('rooms', $rooms);
+        return view('employees.list', compact('users'))->with('departments', $departments);
     }
 
     public function destroy(Request $request)
@@ -116,9 +116,9 @@ class EmployeeController extends Controller
 
     public function viewAdd()
     {
-        $rooms = Room::select('rooms.room_name', 'rooms.id')->get();
+        $departments = Department::select('departments.department_name', 'departments.id')->get();
 
-        return view('add')->with('rooms', $rooms);
+        return view('employees.add')->with('departments', $departments);
     }
 
     public function add(CreateFormRequest $request)
@@ -129,7 +129,7 @@ class EmployeeController extends Controller
                 $user = new User();
                 $user->name = (string)$request->input('name');
                 $user->email = (string)$request->input('email');
-                $user->room_id = (int)$request->input('room');
+                $user->department_id = (int)$request->input('room');
                 $user->auth = (int)$request->input('auth');
                 $user->birth_day = (string)$request->input('birth_day');
                 $user->start_at = (string)$request->input('start_at');
@@ -150,12 +150,12 @@ class EmployeeController extends Controller
                     $user->image = '/images/default.jpeg';
                 }
                 $user->save();
-                return redirect('list')->with('success', "Insert successfully");
+                return redirect('employees')->with('success', "Insert successfully");
             } catch (Exception $e) {
-                return redirect('list/add')->with('error', "operation failed");
+                return redirect('employees/add')->with('error', "operation failed");
             }
         } else {
-            return redirect('list/add')->with('error', "Email đã tồn tại");
+            return redirect('employees/add')->with('error', "Email đã tồn tại");
         }
     }
 
@@ -166,13 +166,13 @@ class EmployeeController extends Controller
 
     public function viewEdit(User $user)
     {
-        return view('edit')->with('user', $user);
+        return view('employees.edit')->with('user', $user);
     }
     public function edit(User $user, CreateFormRequest $request)
     {
         $this->employeeService->edit($request, $user);
 
-        return redirect('list');
+        return redirect('employees');
     }
 
     public function export_csv()

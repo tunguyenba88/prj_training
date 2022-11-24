@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'auth' => fake()->numberBetween($min = 3, $max = 3),
             'image' => Str::random(10),
             'phone' => Str::random(10),
-            'room_id' => fake()->numberBetween($min = 1, $max = 3),
+            'department_id' => fake()->numberBetween($min = 1, $max = 3),
         ];
     }
 

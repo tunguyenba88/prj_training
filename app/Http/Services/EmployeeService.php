@@ -26,7 +26,7 @@ class EmployeeService
     public function edit($request, $user)
     {
         $user->name = (string)$request->input('name');
-        $user->room_id = (int)$request->input('room');
+        $user->department_id = (int)$request->input('room');
         $user->auth = (int)$request->input('auth');
         $user->birth_day = (string)$request->input('birth_day');
         $user->start_at = (string)$request->input('start_at');
