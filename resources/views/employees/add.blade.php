@@ -11,18 +11,18 @@
             @csrf
             <div class="form-outline mb-4">
                 <label class="" for="name">Full Name</label>
-                <input type="text" name="name" id="name" class="form-control" />
+                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" />
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="name">Room</label>
                 <select class="form-select" id="room" name="room">
                     <option value="">Select Room</option>
                     @foreach ($departments as $department)
-                        <option value="{{ $department->id }}">
+                        <option value="{{ $department->id }}" {{ old('room') == $department->id ? 'selected' : '' }}>
                             {{ $department->department_name }}
                         </option>
                     @endforeach
@@ -31,19 +31,21 @@
             <div class="form-outline mb-4">
                 <label class="" for="name">Position</label>
                 <select class="form-select" id="auth" name="auth" style="width: 5rem">
-                    <option value="1">Admin</option>
-                    <option value="2">Quản lý</option>
-                    <option value="3">Nhân viên</option>
+                    <option value="1" {{ old('auth') == 1 ? 'selected' : '' }}>Admin</option>
+                    <option value="2" {{ old('auth') == 2 ? 'selected' : '' }}>Quản lý</option>
+                    <option value="3" {{ old('auth') == 3 ? 'selected' : '' }}>Nhân viên</option>
                 </select>
             </div>
 
             <div class="form-outline mb-4">
                 <label class="" for="birth_day">Birth Day</label>
-                <input type="date" name="birth_day" id="birth_day" class="form-control" />
+                <input type="date" name="birth_day" id="birth_day" class="form-control"
+                    value="{{ old('birth_day') }}" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="start_at">Date start work</label>
-                <input type="date" name="start_at" id="start_at" class="form-control" />
+                <input type="date" name="start_at" id="start_at" class="form-control"
+                    value="{{ old('start_at') }}" />
             </div>
 
             <div class="form-outline mb-4">
@@ -56,12 +58,12 @@
 
             <div class="form-outline mb-4">
                 <label for="image" class="">Change Avatar</label>
-                <input type="file" class="" id="image" name="image" />
+                <input type="file" class="" id="image" name="image" value="{{ old('image') }}" />
             </div>
 
             <div class="form-outline mb-4">
                 <label class="" for="phone">Phone</label>
-                <input type="text" name="phone" id="phone" class="form-control" />
+                <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" />
             </div>
 
             <button type="submit" class="btn btn-primary btn-block mb-4">Add</button>

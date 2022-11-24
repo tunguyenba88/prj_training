@@ -6,7 +6,9 @@
 </head>
 
 <body>
-    @include('layout.navbar')
+    @if (Auth::user()->id < 3)
+        @include('layout.navbar')
+    @endif
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="dropdown">
@@ -59,7 +61,7 @@
                 @csrf
                 <div class="input-group">
                     <div class="form-outline">
-                        <input type="text" id="form1" name="form1" value="{{ old('from1') }}"
+                        <input type="text" id="form1" name="form1" value="{{ request()->form1 }}"
                             class="form-control" />
                         <label class="form-label" for="form1">Search</label>
                     </div>

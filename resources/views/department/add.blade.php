@@ -11,16 +11,18 @@
             @csrf
             <div class="form-outline mb-4">
                 <label class="" for="name">Name</label>
-                <input type="text" name="department_name" id="department_name" class="form-control" />
+                <input type="text" name="department_name" id="department_name" class="form-control"
+                    value="{{ old('department_name') }}" />
             </div>
             <div class="form-outline mb-4">
                 <label class="" for="description">Description</label>
-                <input type="text" name="description" id="description" class="form-control" />
+                <input type="text" name="description" id="description" class="form-control"
+                    value="{{ old('description') }}" />
             </div>
             <select name="manager" class="form-select" id="manager">
                 <option value="">Select Manager</option>
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}">
+                    <option value="{{ $user->id }}" {{ old('manager') == $user->id ? 'selected' : '' }}>
                         {{ $user->name }}
                     </option>
                 @endforeach

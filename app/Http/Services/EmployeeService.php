@@ -52,8 +52,8 @@ class EmployeeService
         return true;
     }
 
-    public function getUserRoom($room_id)
+    public function getUserRoom($department_id)
     {
-        return User::sortable()->where('room_id', $room_id);
+        return User::sortable()->where('department_id', $department_id);
     }
 }

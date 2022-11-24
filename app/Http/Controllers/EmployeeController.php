@@ -166,7 +166,9 @@ class EmployeeController extends Controller
 
     public function viewEdit(User $user)
     {
-        return view('employees.edit')->with('user', $user);
+        $departments = Department::select('departments.department_name', 'departments.id')->get();
+
+        return view('employees.edit', compact(['user', 'departments']));
     }
     public function edit(User $user, CreateFormRequest $request)
     {

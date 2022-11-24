@@ -6,11 +6,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
                 </li>
-                @if (Auth::user()->id < 3)
-                    <li class="nav-item">
-                        <a class="nav-link" href="/employees">List User</a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/employees">List User</a>
+                </li>
                 @if (Auth::user()->id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="/department">Department</a>

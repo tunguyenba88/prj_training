@@ -37,6 +37,8 @@ class CreateFormRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng điền tên',
+            'name.min' => 'Tên có độ dài từ 6~30 ký tự',
+            'name.max' => 'Tên có độ dài từ 6~30 ký tự',
             'room.required' => 'Vui lòng chọn phòng',
             'birth_day.required' => 'Vui lòng chọn ngày sinh',
             'start_at.required' => 'Vui lòng chọn ngày bắt đầu làm việc',

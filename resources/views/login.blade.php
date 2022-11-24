@@ -12,7 +12,7 @@
             @csrf
             <!-- Email input -->
             <div class="form-outline mb-4">
-                <input type="text" name="email" id="email" class="form-control" />
+                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" />
                 <label class="form-label" for="email">Email address</label>
             </div>
 

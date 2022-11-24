@@ -6,7 +6,9 @@
 </head>
 
 <body>
-    @include('layout.navbar')
+    @if (Auth::user()->id < 3)
+        @include('layout.navbar')
+    @endif
     <table class="table align-middle mb-0 bg-white" id="table">
         <thead class="bg-light">
             <tr>
@@ -41,7 +43,7 @@
         {!! $departments->appends(Request::except('page'))->render() !!}
     </div>
 
-    <form action="room/add" method="GET">
+    <form action="department/add" method="GET">
         <button type="submit" class="btn btn-primary">
             Add Room
         </button>
