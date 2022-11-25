@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('layout.header')
-</head>
-
-<body>
+@extends('layout.app')
+@section('content')
     @if (Auth::user()->id < 3)
         @include('layout.navbar')
     @endif
@@ -14,7 +8,7 @@
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-mdb-toggle="dropdown" aria-expanded="false">
-                    Filter
+                    {{ __('users.filter') }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <form action="{{ route('filter') }}" method="GET">
@@ -47,14 +41,14 @@
             @if (Auth::user()->id == 1)
                 <form action="{{ route('import') }}" method="GET">
                     <button type="submit" class="btn btn-primary">
-                        Import CSV
+                        {{ __('users.import') }}
                     </button>
                 </form>
             @endif
 
             <form action="{{ route('export-csv') }}" method="POST">
                 @csrf
-                <input type="submit" value="Export CSV" name="export_csv" class="btn btn-success">
+                <input type="submit" value="{{ __('users.export') }}" name="export_csv" class="btn btn-success">
             </form>
 
             <form action="{{ route('search') }}" method="GET">
@@ -63,7 +57,7 @@
                     <div class="form-outline">
                         <input type="text" id="form1" name="form1" value="{{ request()->form1 }}"
                             class="form-control" />
-                        <label class="form-label" for="form1">Search</label>
+                        <label class="form-label" for="form1">{{ __('users.search') }}</label>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
@@ -75,12 +69,12 @@
     <table class="table align-middle mb-0 bg-white" id="table">
         <thead class="bg-light">
             <tr>
-                <th>Name</th>
-                <th>Info</th>
+                <th>{{ __('users.name') }}</th>
+                <th>{{ __('users.info') }}</th>
                 <th>@sortablelink('birth_day', 'Birth Day')</th>
-                <th>@sortablelink('created_at', 'Started')</th>
-                <th>Status</th>
-                <th>Position</th>
+                <th>@sortablelink('created_at', 'Start At')</th>
+                <th>{{ __('users.status') }}</th>
+                <th>{{ __('users.position') }}</th>
                 @if (Auth::user()->id == 1)
                     <th>Actions</th>
                 @endif
@@ -99,46 +93,46 @@
                         </div>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">Email: {{ $user->email }}</p>
-                        <p class="fw-normal mb-1">Phone: {{ $user->phone }}</p>
+                        <p class="fw-normal mb-1">{{ __('users.email') }}: {{ $user->email }}</p>
+                        <p class="fw-normal mb-1">{{ __('users.phone') }}: {{ $user->phone }}</p>
                     </td>
                     <td>{{ Carbon\Carbon::parse($user->birth_day)->format('d-m-Y') }}</td>
                     <td>{{ Carbon\Carbon::parse($user->start_at)->format('d-m-Y') }}</td>
                     @if ($user->status == 1)
                         <td>
-                            <span class="badge badge-success rounded-pill d-inline">Đang làm việc</span>
+                            <span class="badge badge-success rounded-pill d-inline">{{ __('users.work') }}</span>
                         </td>
                     @else
                         <td>
-                            <span class="badge badge-warning rounded-pill d-inline">Đã Nghỉ Việc</span>
+                            <span class="badge badge-warning rounded-pill d-inline">{{ __('users.resign') }}</span>
                         </td>
                     @endif
 
                     @if ($user->auth == 1)
-                        <td>Admin</td>
+                        <td>{{ __('users.admin') }}</td>
                     @endif
                     @if ($user->auth == 2)
-                        <td>Quản lý bộ phận</td>
+                        <td>{{ __('users.manager') }}</td>
                     @endif
                     @if ($user->auth == 3)
-                        <td>Nhân viên</td>
+                        <td>{{ __('users.employee') }}</td>
                     @endif
                     @if (Auth::user()->id == 1)
                         <td>
                             <a type="button" class="btn btn-primary btn-rounded"
                                 href="/employees/edit/{{ $user->id }}">
-                                Edit
+                                {{ __('users.edit') }}
                             </a>
 
                             <button type="button" class="btn btn-danger btn-rounded"
                                 onclick="removeUser({{ $user->id }}, 'employees/destroy')">
-                                Delete
+                                {{ __('users.delete') }}
                             </button>
                             <form action="{{ route('resetPassword') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ $user->email }}" name="email">
                                 <button type="submit" class="btn btn-success btn-rounded">
-                                    Reset
+                                    {{ __('users.add') }}
                                 </button>
                             </form>
                         </td>
@@ -153,11 +147,8 @@
     @if (Auth::user()->id == 1)
         <form action="{{ route('addUser') }}" method="GET">
             <button type="submit" class="btn btn-primary">
-                Add Employee
+                {{ __('users.add_employee') }}
             </button>
         </form>
     @endif
-    @include('layout.footer')
-</body>
-
-</html>
+@endsection

@@ -31,7 +31,7 @@
                         </a>
 
                         <button type="button" class="btn btn-danger btn-rounded"
-                            onclick="removeRoom({{ $department->id }}, 'department/destroy')">
+                            onclick="removeDepartment({{ $department->id }}, 'department/destroy')">
                             Delete
                         </button>
                     </td>

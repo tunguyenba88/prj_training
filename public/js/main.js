@@ -46,7 +46,7 @@ function removeUser(id, url) {
     }
 }
 
-function removeRoom(id, url) {
+function removeDepartment(id, url) {
     if (confirm("Bạn có chắc chắn muốn xóa không")) {
         $.ajax({
             type: "DELETE",

@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('layout.header')
-</head>
-
-<body>
+@extends('layout.app')
+@section('content')
     <section>
         @if (Auth::user()->id < 3)
             @include('layout.navbar')
@@ -21,7 +15,7 @@
                             <form method="POST" action="" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" class="form-control" id="upload" name="image" hidden />
-                                <label for="upload" class="btn btn-primary">Change Avatar</label>
+                                <label for="upload" class="btn btn-primary">{{ __('profile.change_avatar') }}</label>
                             </form>
                         </div>
                     </div>
@@ -32,7 +26,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Position</p>
+                                <p class="mb-0">{{ __('profile.position') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 @if ($user->auth == 1)
@@ -49,7 +43,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Full Name</p>
+                                <p class="mb-0">{{ __('profile.full_name') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{ $user->name }}</p>
@@ -58,7 +52,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
+                                <p class="mb-0">{{ __('profile.email') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{ $user->email }}</p>
@@ -67,7 +61,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Phone</p>
+                                <p class="mb-0">{{ __('profile.phone') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{ $user->phone }}</p>
@@ -76,7 +70,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Birth Day</p>
+                                <p class="mb-0">{{ __('profile.birth_day') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{ $user->birth_day }}</p>
@@ -92,23 +86,20 @@
         <div class="container-fluid">
             <form action="{{ route('changePassword') }}" method="GET">
                 <button type="submit" class="btn btn-primary">
-                    Change Password
+                    {{ __('profile.change_password') }}
                 </button>
             </form>
             <form action="{{ route('updateProfile') }}" method="GET">
                 <button type="submit" class="btn btn-primary">
-                    Edit Profile
+                    {{ __('profile.edit_profile') }}
                 </button>
             </form>
             @if (Auth::user()->id == 3)
                 <form action="{{ route('logout') }}" method="GET">
                     @csrf
-                    <button type="submit" class="btn btn-danger btn-rounded">Logout</button>
+                    <button type="submit" class="btn btn-danger btn-rounded">{{ __('profile.logout') }}</button>
                 </form>
             @endif
         </div>
     </nav>
-    @include('layout.footer')
-</body>
-
-</html>
+@endsection

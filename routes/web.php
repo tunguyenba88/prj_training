@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
@@ -68,3 +69,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/reset/password', [ResetPasswordController::class, 'sendMail'])->name('resetPassword');
     });
 });
+
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
