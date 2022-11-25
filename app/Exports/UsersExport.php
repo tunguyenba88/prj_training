@@ -16,7 +16,7 @@ class UsersExport implements FromCollection
         if (Auth::user()->id == 1) {
             return User::all();
         } else {
-            return User::where('room_id', Auth::user()->room_id)->get();
+            return User::where('department_id', Auth::user()->room_id)->get();
         }
     }
 }

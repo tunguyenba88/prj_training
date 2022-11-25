@@ -37,7 +37,7 @@ class UsersImport implements ToModel, WithValidation, SkipsOnFailure
             'image' => $row[5],
             'phone' => $row[6],
             'auth' => $row[7],
-            'room_id' => $row[8],
+            'department_id' => $row[8],
             'password' => bcrypt(123456),
         ]);
     }

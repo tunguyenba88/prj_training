@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SendEmail;
-use App\Models\Room;
+use App\Models\Department;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -31,14 +31,14 @@ class UserCommand extends Command
      */
     public function handle()
     {
-        $rooms = Room::whereHas('users', function ($query) {
+        $departments = Department::whereHas('users', function ($query) {
             $query->whereMonth('birth_day', '=', Carbon::now()->month)->whereDay('birth_day', '=', Carbon::now()->day)->where('auth', 3);
         })->get();
-        if (count($rooms)) {
+        if (count($departments)) {
             $listManagers = array();
             $messages = array();
-            foreach ($rooms as $room) {
-                $manager = User::where('room_id', $room->id)->where('auth', 2)->first();
+            foreach ($departments as $department) {
+                $manager = User::where('department_id', $department->id)->where('auth', 2)->first();
                 if (!is_null($manager)) {
                     array_push($listManagers, $manager);
                     $message = [
@@ -46,7 +46,7 @@ class UserCommand extends Command
                         'task' => 'Happy Birth Day',
                         'data' => '',
                     ];
-                    $listUsersHaveBirthday = User::where('room_id', $room->id)
+                    $listUsersHaveBirthday = User::where('department_id', $department->id)
                         ->whereMonth('birth_day', '=', Carbon::now()->month)
                         ->whereDay('birth_day', '=', Carbon::now()->day)
                         ->where('auth', 3)->get();
