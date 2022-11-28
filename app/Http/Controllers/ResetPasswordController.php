@@ -20,8 +20,8 @@ class ResetPasswordController extends Controller
         $messages = array();
         User::where('email', $request->email)->update(['password' => bcrypt($password)]);
         $message = [
-            'title' => 'Reset Password',
-            'task' => 'New Password',
+            'title' => __('messages.reset_password_title'),
+            'task' => __('messages.reset_password_task'),
             'data' => $password,
         ];
         array_push($listUser, $user);

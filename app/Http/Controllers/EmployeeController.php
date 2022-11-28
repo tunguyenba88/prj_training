@@ -106,11 +106,12 @@ class EmployeeController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Successfull'
+                'message' => __('messages.delete_user_success')
             ]);
         }
         return response()->json([
             'error' => true,
+            'message' => __('messages.delete_user_success')
         ]);
     }
 
@@ -150,12 +151,12 @@ class EmployeeController extends Controller
                     $user->image = '/images/default.jpeg';
                 }
                 $user->save();
-                return redirect('employees')->with('success', "Insert successfully");
+                return redirect('employees')->with('success', __('messages.insert_user_success'));
             } catch (Exception $e) {
-                return redirect('employees/add')->with('error', "operation failed");
+                return redirect('employees/add')->with('error', __('messages.insert_user_fail'));
             }
         } else {
-            return redirect('employees/add')->with('error', "Email đã tồn tại");
+            return redirect('employees/add')->with('error', __('messages.duplicate_email'));
         }
     }
 

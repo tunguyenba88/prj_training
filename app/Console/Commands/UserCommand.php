@@ -42,8 +42,8 @@ class UserCommand extends Command
                 if (!is_null($manager)) {
                     array_push($listManagers, $manager);
                     $message = [
-                        'title' => 'Happy Birth Day',
-                        'task' => 'Happy Birth Day',
+                        'title' => __('messages.birthday_title'),
+                        'task' => __('messages.birthday_task'),
                         'data' => '',
                     ];
                     $listUsersHaveBirthday = User::where('department_id', $department->id)

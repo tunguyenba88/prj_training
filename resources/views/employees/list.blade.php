@@ -15,14 +15,14 @@
                         @csrf
                         <li>
                             <select class="form-select" id="status" name="status">
-                                <option value="">Select Status</option>
-                                <option value="1">Working</option>
-                                <option value="2">Resign</option>
+                                <option value="">{{ __('users.select_status') }}</option>
+                                <option value="1">{{ __('users.work') }}</option>
+                                <option value="2">{{ __('users.resign') }}</option>
                             </select>
                         </li>
                         <li>
                             <select class="form-select" id="room" name="room">
-                                <option value="">Select Room</option>
+                                <option value="">{{ __('users.select_department') }}</option>
                                 @foreach ($departments as $department)
                                     <option value="{{ $department->id }}">
                                         {{ $department->department_name }}
@@ -32,7 +32,7 @@
                         </li>
                         <li>
                             <button type="submit" class="btn btn-primary">
-                                Confirm
+                                {{ __('users.filter') }}
                             </button>
                         </li>
                     </form>
@@ -76,7 +76,7 @@
                 <th>{{ __('users.status') }}</th>
                 <th>{{ __('users.position') }}</th>
                 @if (Auth::user()->id == 1)
-                    <th>Actions</th>
+                    <th>{{ __('users.action') }}</th>
                 @endif
             </tr>
         </thead>

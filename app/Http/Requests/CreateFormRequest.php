@@ -36,17 +36,17 @@ class CreateFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng điền tên',
-            'name.min' => 'Tên có độ dài từ 6~30 ký tự',
-            'name.max' => 'Tên có độ dài từ 6~30 ký tự',
-            'room.required' => 'Vui lòng chọn phòng',
-            'birth_day.required' => 'Vui lòng chọn ngày sinh',
-            'start_at.required' => 'Vui lòng chọn ngày bắt đầu làm việc',
-            'phone.min' => 'Số điện thoại có độ dài 10 chữ số',
-            'phone.max' => 'Số điện thoại có độ dài 10 chữ số',
-            'phone.regex' => 'Số điện thoại có độ dài 10 chữ số',
-            'birth_day.before' => 'Ngày sinh phải nhỏ hơn ngày hiện tại',
-            'start_at.before' => 'Ngày làm việc phải nhỏ hơn ngày hiện tại',
+            'name.required' => __('messages.name_required'),
+            'name.min' => __('messages.name_min'),
+            'name.max' => __('messages.name_max'),
+            'room.required' => __('messages.room_required'),
+            'birth_day.required' => __('messages.birth_day_required'),
+            'start_at.required' => __('messages.start_at_required'),
+            'phone.min' => __('messages.phone_min'),
+            'phone.max' => __('messages.phone_max'),
+            'phone.regex' => __('messages.phone_regex'),
+            'birth_day.before' => __('messages.birth_day_before'),
+            'start_at.before' => __('messages.start_at_before'),
         ];
     }
 }

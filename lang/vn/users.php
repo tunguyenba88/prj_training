@@ -24,5 +24,9 @@ return [
     'employee' => 'Nhân viên',
     'email' => 'Địa chỉ email',
     'department' => 'Bộ phận',
-    'phone' => 'Số điện thoại'
+    'phone' => 'Số điện thoại',
+    'action' => 'Tác vụ',
+    'select_status' => 'Chọn trạng thái',
+    'select_department' => 'Chọn phòng',
+    'change_avatar' => 'Đổi ảnh đại diện',
 ];

@@ -31,11 +31,11 @@ class ChangeProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'birth_day.required' => 'Vui lòng chọn ngày sinh',
-            'phone.min' => 'Số điện thoại có độ dài 10 chữ số',
-            'phone.max' => 'Số điện thoại có độ dài 10 chữ số',
-            'phone.regex' => 'Số điện thoại có độ dài 10 chữ số',
-            'birth_day.before' => 'Ngày sinh phải nhỏ hơn ngày hiện tại',
+            'birth_day.required' => __('messages.birth_day_required'),
+            'phone.min' => __('messages.phone_min'),
+            'phone.max' => __('messages.phone_max'),
+            'phone.regex' => __('messages.phone_regex'),
+            'birth_day.before' => __('messages.birth_day_before'),
         ];
     }
 }

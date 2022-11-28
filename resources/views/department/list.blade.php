@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('layout.header')
-</head>
-
-<body>
+@extends('layout.app')
+@section('content')
     @if (Auth::user()->id < 3)
         @include('layout.navbar')
     @endif
     <table class="table align-middle mb-0 bg-white" id="table">
         <thead class="bg-light">
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Manager</th>
-                <th>Actions</th>
+                <th>{{ __('department.name') }}</th>
+                <th>{{ __('department.description') }}</th>
+                <th>{{ __('department.manager') }}</th>
+                <th>{{ __('department.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,14 +19,13 @@
                     <td>{{ $department->description }}</td>
                     <td>{{ $department->name }}</td>
                     <td>
-                        <a type="button" class="btn btn-primary btn-rounded"
-                            href="/department/edit/{{ $department->id }}">
-                            Edit
+                        <a type="button" class="btn btn-primary btn-rounded" href="/department/edit/{{ $department->id }}">
+                            {{ __('department.edit') }}
                         </a>
 
                         <button type="button" class="btn btn-danger btn-rounded"
                             onclick="removeDepartment({{ $department->id }}, 'department/destroy')">
-                            Delete
+                            {{ __('department.delete') }}
                         </button>
                     </td>
                 </tr>
@@ -45,10 +38,8 @@
 
     <form action="department/add" method="GET">
         <button type="submit" class="btn btn-primary">
-            Add Room
+            {{ __('department.add_department') }}
         </button>
     </form>
     @include('layout.footer')
-</body>
-
-</html>
+@endsection

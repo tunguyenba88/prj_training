@@ -31,10 +31,10 @@ class DepartmentRequest extends FormRequest
     public function messages()
     {
         return [
-            'department_name.required' => 'Vui lòng điền tên phòng',
-            'department_name.min' => 'Tên bộ phận có độ dài 3~50 ký tự',
-            'department_name.max' => 'Tên bộ phận có độ dài 3~50 ký tự',
-            'description.max' => 'Mô tả có độ dài < 255 ký tự',
+            'department_name.required' => __('messages.department_name_required'),
+            'department_name.min' => __('messages.department_name_min'),
+            'department_name.max' => __('messages.department_name_min'),
+            'description.max' => __('messages.description_max'),
         ];
     }
 }

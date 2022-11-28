@@ -32,13 +32,13 @@ class PasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'current_password.required' => 'Vui lòng điền lại mật khẩu cũ',
-            'new_password.required' => 'Vui lòng điền lại mật khẩu mới',
-            'confirm_password.required' => 'Vui lòng điền lại mật khẩu',
-            'new_password.min' => 'Mật khẩu có độ dài từ 6 đến 30 ký tự',
-            'new_password.max' => 'Mật khẩu có độ dài từ 6 đến 30 ký tự',
-            'confirm_password.same' => 'Xác nhận lại mật khẩu',
-            'new_password.regex' => 'Mật khẩu bao gồm chữ cái, số, ký tự đặc biệt',
+            'current_password.required' => __('messages.current_password_required'),
+            'new_password.required' => __('messages.new_password_required'),
+            'confirm_password.required' => __('messages.confirm_password_required'),
+            'new_password.min' => __('messages.new_password_min'),
+            'new_password.max' => __('messages.new_password_max'),
+            'confirm_password.same' => __('messages.confirm_password_same'),
+            'new_password.regex' => __('messages.new_password_regex'),
         ];
     }
 }

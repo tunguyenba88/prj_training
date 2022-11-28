@@ -14,5 +14,9 @@ return [
     'full_name' => 'Họ tên',
     'email' => 'Địa chỉ email',
     'phone' => 'Số điện thoại',
-    'birth_day' => 'Ngày sinh'
+    'birth_day' => 'Ngày sinh',
+    'save' => 'Lưu',
+    'current_password' => 'Mật khẩu cũ',
+    'new_password' => 'Mật khẩu mới',
+    'confirm_password' => 'Xác nhận',
 ];

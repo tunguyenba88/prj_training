@@ -43,15 +43,15 @@ class ProfileController extends Controller
         $password = User::where('id', $user_id)->first('password');
         $current_password = $request->current_password;
         if (!(Hash::check($current_password, $password->password))) {
-            return redirect()->back()->with("error", "Nhập sai mật khẩu");
+            return redirect()->back()->with("error", __('messages.wrong_password'));
         }
         $new_password = $request->new_password;
         if (Hash::check($new_password, $password->password)) {
-            return redirect()->back()->with("error", "Trùng với mật khẩu cũ");
+            return redirect()->back()->with("error", __('messages.duplicate_password'));
         }
 
         User::where('id', $user_id)->update(['password' => bcrypt($new_password)]);
 
-        return redirect('profile')->with("success", "Đổi mật khẩu thành công !");
+        return redirect('profile')->with("success", __('messages.password_success'));
     }
 }

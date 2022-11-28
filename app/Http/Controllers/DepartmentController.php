@@ -53,7 +53,7 @@ class DepartmentController extends Controller
         $department->description = (string)$request->input('description');
         $department->manager_id = (int)$request->input('manager');
         $department->save();
-        return redirect('department')->with('success', "Insert successfully");
+        return redirect('department');
     }
 
     /**
@@ -106,11 +106,12 @@ class DepartmentController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Successfull'
+                'message' => __('messages.delete_department_fail')
             ]);
         }
         return response()->json([
             'error' => true,
+            'message' => __('messages.delete_department_fail')
         ]);
     }
 }

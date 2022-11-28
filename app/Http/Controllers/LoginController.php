@@ -22,7 +22,7 @@ class LoginController extends Controller
         ], $remember)) {
             return redirect()->route('profile');
         }
-        Session::flash('error', 'Email hoặc Password không đúng');
+        Session::flash('error', __('messages.wrong_email'));
         return redirect()->back();
     }
 

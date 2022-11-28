@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    @include('layout.header')
-</head>
-
-<body>
+@extends('layout.app')
+@section('content')
     <div class="container">
         <div class="card bg-light mt-3">
             <div class="card-body">
@@ -24,11 +18,9 @@
                     @endif
                     <input type="file" name="file" class="form-control" accept=".xlsx">
                     <br>
-                    <button class="btn btn-success">Submit</button>
+                    <button class="btn btn-success">{{ __('users.import') }}</button>
                 </form>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection
