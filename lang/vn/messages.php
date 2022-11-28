@@ -31,15 +31,16 @@ return [
     'wrong_email' => 'Email hoặc Password không đúng',
     'insert_user_success' => 'Thêm nhân viên thành công',
     'insert_user_fail' => 'Thêm nhân viên thất bại',
-    'delete_user_success' => 'Xóa nhân viên thất bại',
+    'delete_user_success' => 'Xóa nhân viên thành công',
     'delete_user_fail' => 'Xóa nhân viên thất bại',
     'duplicate_email' => 'Email đã tồn tại',
     'insert_department_success' => 'Thêm phòng thành công',
     'insert_department_fail' => 'Thêm phòng thất bại',
-    'delete_department_success' => 'Xóa phòng thất bại',
+    'delete_department_success' => 'Xóa phòng thành công',
     'delete_department_fail' => 'Xóa phòng thất bại',
     'reset_password_title' => 'Đặt lại mật khẩu',
     'reset_password_task' => 'Mật khẩu mới',
     'birthday_title' => 'Chúc mừng sinh nhật',
     'birthday_task' => 'Chúc mừng sinh nhật',
+    'language' => 'Ngôn ngữ'
 ];

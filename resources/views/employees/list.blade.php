@@ -71,8 +71,8 @@
             <tr>
                 <th>{{ __('users.name') }}</th>
                 <th>{{ __('users.info') }}</th>
-                <th>@sortablelink('birth_day', 'Birth Day')</th>
-                <th>@sortablelink('created_at', 'Start At')</th>
+                <th>@sortablelink('birth_day', __('users.birth_day'))</th>
+                <th>@sortablelink('created_at', __('users.start_at'))</th>
                 <th>{{ __('users.status') }}</th>
                 <th>{{ __('users.position') }}</th>
                 @if (Auth::user()->id == 1)

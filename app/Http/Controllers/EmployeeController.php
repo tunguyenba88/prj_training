@@ -190,7 +190,11 @@ class EmployeeController extends Controller
 
     public function import_csv(Request $request)
     {
-        Excel::import(new UsersImport, $request->file('file'));
-        return redirect()->back();
+        if ($request->file('file')) {
+            Excel::import(new UsersImport, $request->file('file'));
+            return redirect()->back();
+        } else {
+            return redirect('employees/import');
+        }
     }
 }
